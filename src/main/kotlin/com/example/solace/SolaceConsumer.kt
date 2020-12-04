@@ -24,7 +24,7 @@ class SolaceConsumer(val jmsTemplate: JmsTemplate) {
 		logger.info { "consumeQueue1 ${message.text}" }
 	}
 
-	@JmsListener(destination = "\${solace.target.queue}", concurrency = "2")
+	@JmsListener(destination = "\${solace.target.queue}",  concurrency = "2")
 	fun consumeQueue2(message: SolMessage) {
 		if (message !is SolTextMessage) {
 			logger.error { "Wrong message $message" }
@@ -33,7 +33,7 @@ class SolaceConsumer(val jmsTemplate: JmsTemplate) {
 		logger.info { "consumeQueue2 ${message.text}" }
 	}
 
-	@JmsListener(destination = "\${solace.target.topic}", containerFactory = "jmsTopicContainerFactory")
+	@JmsListener(destination = "\${solace.target.topic}", selector = "tier/hund/*", containerFactory = "jmsTopicContainerFactory")
 	fun consumeTopic1(message: SolMessage) {
 		logger.info { "consumeTopic1 $message" }
 	}

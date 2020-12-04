@@ -7,7 +7,7 @@ solace:
     msgVpn: default
   target:
     queue: job_queue
-    topic: pub_sub_topic
+    topic: tier/hund/puddel
     rpc: rpc_topic
 
 spring:
