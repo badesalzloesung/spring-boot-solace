@@ -13,7 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>Solace</name>
-	<description>Solace Pub/Sub+</description>
+	<description>Solace Pub/Sub+ Spring Boot</description>
 
 	<properties>
 		<java.version>11</java.version>

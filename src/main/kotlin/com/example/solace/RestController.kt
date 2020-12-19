@@ -22,7 +22,7 @@ class RestController(val jmsTemplate: JmsTemplate,
 	}
 
 	@PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE], value = ["/queue"])
-	fun postJobQueueSolace(@RequestBody myData: MyData) {
+	fun postQueue(@RequestBody myData: MyData) {
 		jmsTemplate.isPubSubDomain = false
 		logger.debug { "Sending $myData to queue - $queueName" }
 		jmsTemplate.convertAndSend(queueName, Klaxon().toJsonString(myData))
@@ -30,7 +30,7 @@ class RestController(val jmsTemplate: JmsTemplate,
 	}
 
 	@PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE], value = ["/topic"])
-	fun postPubSubSolace(@RequestBody myData: MyData) {
+	fun postTopic(@RequestBody myData: MyData) {
 		jmsTemplate.isPubSubDomain = true
 		logger.debug { "Sending $myData to topic - $topicName" }
 		jmsTemplate.convertAndSend(topicName, Klaxon().toJsonString(myData))
@@ -38,7 +38,7 @@ class RestController(val jmsTemplate: JmsTemplate,
 	}
 
 	@PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE], value = ["/rpc"])
-	fun postRPCSolace(@RequestBody myData: MyData) {
+	fun postRPC(@RequestBody myData: MyData) {
 		jmsTemplate.isPubSubDomain = true
 		logger.debug { "Sending $myData to queue - $rpcName" }
 		val response = jmsTemplate.sendAndReceive(rpcName) { session ->
